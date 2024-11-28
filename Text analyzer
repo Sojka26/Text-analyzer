@@ -27,40 +27,62 @@ other freshwater genera and herring similar to those
 in modern oceans. Other fish such as paddlefish,
 garpike and stingray are also present.''']
 
-import string
-values =['123','pass123','pasword123','pass123']
-keys = ['bob','ann','mike','liz']
-
 text_01 = TEXTS[0]
 text_02 = TEXTS[1]
 text_03 = TEXTS[2]
 text_list = [text_01,text_02,text_03]
-user = input('Enter your name:')
-password = input('Enter your password:')
-if user  in keys[0] and values[0]:
-    print('Hello bob,')
-elif user in keys[1] and values[1]:
-    print('Hello ann.')
-elif user  in keys[2] and values[2]:
-    print('Hello mike,')
-elif user   in keys[3] and values[3]:
-    print('Hello liz')
+user_passwd_dict = {'bob': '123', 'ann': 'pass123', 'mike': 'password123', 'liz': 'pass123'}
+
+users = set(user_passwd_dict.keys())
+username = input('Enter your name: ').lower()
+password = input("Enter your password: ")
+if username in users:
+    if password != user_passwd_dict[username]:
+        print("Wrong credentials.")
+        quit()
+    else:
+        print(f"Welcome to Text Analyzer App, {username.title()}!!")
 else:
-    print('Unregistered user')
+    print("Wrong credentials.")
     quit()
 print('We have three texts for analize:')
-number =int(input('Write a number of a text'))
-if number >= 1 and number<=3:
+number = (input('Write a number of a text'))
+
+if number>=1 and number<=3:
     selected_text = text_list[number -1]
     print('Your text is:'+ selected_text)
+    
 else:
     print('Text does not exist')
     quit()
+
+
 word_count = len(selected_text.split())
 print('The number of words is:' + str(word_count))
-# To do next:
-# 1. Print a number of titlecase words from selected_text
-# 2. Number of lowercase words
-# 3. Number of uppercase words
-# 4. Number of numeric strings
-# 5. Sum of all numbers
+words = selected_text.split()
+titlecase = 0
+uppercase = 0
+lowercase = 0
+numeric = 0
+numbers = []
+word_lens = {}
+graf = '*'
+for word in words:
+    word = word.strip(' .,')
+    if word.istitle():
+        titlecase += 1
+    if word.isupper():
+        uppercase += 1
+    if word.islower():
+        lowercase += 1
+    if word.isnumeric():
+        numeric += 1
+        numbers.append(int(word))
+print('There are {} words in the selected text.'.format(len(words)))
+print('There are {} titlecase words.'.format(titlecase))
+print('There are {} uppercase words.'.format(uppercase))
+print('There are {} lowercase words.'.format(lowercase))
+print('There are {} numeric strings.'.format(numeric))
+print('Sum of all numbers is: {}'.format(sum(numbers)))
+
+
