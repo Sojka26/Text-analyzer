@@ -84,5 +84,13 @@ print('There are {} uppercase words.'.format(uppercase))
 print('There are {} lowercase words.'.format(lowercase))
 print('There are {} numeric strings.'.format(numeric))
 print('Sum of all numbers is: {}'.format(sum(numbers)))
+word_lengths = [len(word.strip(',.?! ')) for word in words]
+word_counter = {}
+for length in word_lengths:
+    word_counter[length] = word_counter.get(length, 0) + 1
+
+for length, count in sorted(word_counter.items()):
+    print(f'{length:<3}{"|":<2}{"*"*count:<15}{"|":<2}{count:<10}')
+quit()
 
 
