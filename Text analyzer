@@ -66,7 +66,6 @@ lowercase = 0
 numeric = 0
 numbers = []
 word_lens = {}
-graf = '*'
 for word in words:
     word = word.strip(' .,')
     if word.istitle():
