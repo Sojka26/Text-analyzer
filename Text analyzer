@@ -1,3 +1,9 @@
+'''
+author = Marek Sojka
+email = mara1x@email.cz
+discord = marek98_58883
+'''
+
 TEXTS = ['''
 Situated about 10 miles west of Kemmerer,
 Fossil Butte is a ruggedly impressive
@@ -27,6 +33,12 @@ other freshwater genera and herring similar to those
 in modern oceans. Other fish such as paddlefish,
 garpike and stingray are also present.''']
 
+
+
+
+
+
+
 text_01 = TEXTS[0]
 text_02 = TEXTS[1]
 text_03 = TEXTS[2]
@@ -46,19 +58,21 @@ else:
     print("Wrong credentials.")
     quit()
 print('We have three texts for analize:')
-number = (input('Write a number of a text'))
+number = input(f"Enter a number btw. 1 and {len(TEXTS)} to select: ")
 
-if number>=1 and number<=3:
-    selected_text = text_list[number -1]
-    print('Your text is:'+ selected_text)
-    
+
+if not number.isnumeric():
+    print("Wrong symbol, terminating the program...")
+    exit()
 else:
-    print('Text does not exist')
-    quit()
+    number = int(number)
 
-
-word_count = len(selected_text.split())
-print('The number of words is:' + str(word_count))
+if 0 < number <= len(TEXTS):
+    words_in_text = TEXTS[number - 1].split()
+else:
+    print("Wrong number, terminating the program...")
+    exit()
+selected_text = text_list[number -1]
 words = selected_text.split()
 titlecase = 0
 uppercase = 0
@@ -83,6 +97,7 @@ print('There are {} uppercase words.'.format(uppercase))
 print('There are {} lowercase words.'.format(lowercase))
 print('There are {} numeric strings.'.format(numeric))
 print('Sum of all numbers is: {}'.format(sum(numbers)))
+
 word_lengths = [len(word.strip(',.?! ')) for word in words]
 word_counter = {}
 for length in word_lengths:
@@ -90,6 +105,5 @@ for length in word_lengths:
 
 for length, count in sorted(word_counter.items()):
     print(f'{length:<3}{"|":<2}{"*"*count:<15}{"|":<2}{count:<10}')
-quit()
 
 
